@@ -1,8 +1,13 @@
 import os
 import openai
+from dotenv import load_dotenv
+
 
 class DicoBuilder:
-    def __init__(self, api_key):
+    def __init__(self):
+        load_dotenv()
+        api_key = os.getenv('OPENAI_API_KEY')
+        print(api_key)
         self.api_key = api_key
         openai.api_key = self.api_key
 
