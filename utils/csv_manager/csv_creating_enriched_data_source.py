@@ -1,5 +1,4 @@
 import pandas as pd
-import os
 
 def create_csv_enriched_data_source():
 	# Charger les données à pazrtir des fichiers CSV

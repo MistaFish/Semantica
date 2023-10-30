@@ -1,39 +1,40 @@
 num_categorie,nom_categorie,num_sous_categorie,nom_sous_categorie
-1.,Service et personnel,1.1,Courtoisie et aimabilité du personnel
-1.,Service et personnel,1.2,Compétence du personnel
-1.,Service et personnel,1.3,"Perception du personnel (souriant, dynamique, professionnel)"
-1.,Service et personnel,1.4,Interaction avec le client
-1.,Service et personnel,1.5,Gestion de l'affluence
-2.,Nourriture,2.1,Qualité des plats
-2.,Nourriture,2.2,Variété des plats
-2.,Nourriture,2.3,Cuisson et température des aliments
-2.,Nourriture,2.4,Assaisonnement des aliments
-2.,Nourriture,2.5,Disponibilité des plats
-3.,Propreté,3.1,Propreté générale du restaurant
-3.,Propreté,3.2,Propreté des toilettes
-3.,Propreté,3.3,Propreté et rangement des tables
-3.,Propreté,3.4,Propreté des couverts et assiettes
-3.,Propreté,3.5,"Propreté des espaces de service (buffets, stands)"
-4.,Ambiance,4.1,Décoration et agencement du restaurant
-4.,Ambiance,4.2,Bruit dans le restaurant
-4.,Ambiance,4.3,"Espace (espacement entre les tables, taille du restaurant)"
-4.,Ambiance,4.4,Environnement pour les enfants
-5.,Hygiène,5.1,Présence de déchets
-5.,Hygiène,5.2,Nettoyage et débarrassage des tables
-5.,Hygiène,5.3,Fréquence du réapprovisionnement des buffets
-6.,Temps d'attente,6.1,Gestion du temps d'attente
-6.,Temps d'attente,6.2,Rapidité du service en caisse
-6.,Temps d'attente,6.3,Gestion de l'affluence
-7.,Accompagnements,7.1,Variété et qualité des légumes
-7.,Accompagnements,7.2,Presence de sauce sur assiette
-7.,Accompagnements,7.3,Assaisonnement des accompagnements
-7.,Accompagnements,7.4,Disponibilité des sauces
-8.,Autres produits,8.1,Connaissance du personnel sur les produits
-8.,Autres produits,8.2,Disponibilité des produits comme les crêpes
-8.,Autres produits,8.3,Problèmes techniques impactants l'offre de produits
-9.,Accessibilité et facilité d'accès,9.1,Accessibilité du restaurant
-9.,Accessibilité et facilité d'accès,9.2,Places de parking
-9.,Accessibilité et facilité d'accès,9.3,Aménagement de la terrasse
-9.,Accessibilité et facilité d'accès,10.,Prix
-9.,Accessibilité et facilité d'accès,11.,Communication
-9.,Accessibilité et facilité d'accès,12.,Poisson
+1.,: Propreté,1.1,: Propreté des toilettes
+1.,: Propreté,1.2,: Propreté de la salle 
+1.,: Propreté,1.3,: Propreté des tables
+1.,: Propreté,1.4,: Propreté de la vaisselle
+2.,: Personnel,2.1,: Accueil
+2.,: Personnel,2.2,: Sympathie
+2.,: Personnel,2.3,: Gestion efficace de l'affluence
+2.,: Personnel,2.4,: Comportement pendant le service
+2.,: Personnel,2.5,: Attention aux détails
+3.,: Atmosphère,3.1,: Convivialité
+3.,: Atmosphère,3.2,: Espace de circulation
+3.,: Atmosphère,3.3,: Bruit
+3.,: Atmosphère,3.4,: Animation musicale
+4.,: Repas,4.1,: Goût
+4.,: Repas,4.2,: Température
+4.,: Repas,4.3,: Qualité
+4.,: Repas,4.4,: Variété
+4.,: Repas,4.5,: Buffet
+4.,: Repas,4.6,: Présentation des plats
+5.,: Choix,5.1,: Menu
+5.,: Choix,5.2,: Buffet de légumes
+5.,: Choix,5.3,: Entrées
+5.,: Choix,5.4,: Plats chauds
+5.,: Choix,5.5,: Desserts
+6.,: Organisation du service,6.1,: Attente pour les plats
+6.,: Organisation du service,6.2,: Remplissage des plats
+6.,: Organisation du service,6.3,: Passage en caisse
+6.,: Organisation du service,6.4,: Disponibilité des accompagnements
+7.,: Installation,7.1,: Disposition des tables
+7.,: Installation,7.2,: Confort du mobilier
+8.,: Gestion des ressources,8.1,: Gestion de la caisse
+8.,: Gestion des ressources,8.2,: Gestion des réservations
+9.,: Promotion du restaurant,9.1,: Promotion du moment
+9.,: Promotion du restaurant,9.2,: Rénovation
+10.,: Accessibilité ,10.1,: Accessibilité du restaurant
+10.,: Accessibilité ,10.2,: Parking
+11.,: Offre pour les enfants,11.1,: Jeux pour enfants
+12.,: Expérience globale,12.1,: Satisfaction générale
+12.,: Expérience globale,12.2,: Envie de revenir
