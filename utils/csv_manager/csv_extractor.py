@@ -5,6 +5,10 @@ from ..comment import Comment
 from ..batch import Batch
 from ..constants.params import TOKEN_LIMIT
 
+def get_total_line_count(filename: str) -> int:
+    with open(filename, "r") as file:
+        return sum(1 for _ in file)
+
 class CSVExtractor:
     def __init__(self, filename: str, total_line_count: int) -> None:
         self.filename: str = filename
@@ -35,8 +39,7 @@ class CSVExtractor:
                 if i < self.last_read_position:
                     continue
 
-
-                reading_id = f"P{reader.line_num}"
+                reading_id = f"P{reader.line_num - 1}"
                 comment_text = row["f600_comment"]
                 comment = Comment(reading_id, comment_text)
                 token_count = len(self.encoder.encode(comment.comment))
@@ -54,7 +57,7 @@ class CSVExtractor:
                 self.total_comments += 1
                 self.Batch.add_comment(comment, token_count)
                 if reader.line_num == self.total_line_count:
-#                     self.Batch.print_batch()
+                    # self.Batch.print_batch()
 #                     print(
 #                         f"Stopped at line {reader.line_num} with \
 # {total_token_count} tokens and in batch {self.Batch.batch_size} reviews."

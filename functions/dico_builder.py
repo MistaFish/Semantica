@@ -27,7 +27,7 @@ class DicoBuilder:
               "content": f"A partir des {nb_reviews} avis que j'ai reçu concernant mon restaurant, crée un dictionnaire sémantique."
             }
           else:
-            model_gpt = "gpt-4"
+            model_gpt = "gpt-3.5-turbo"
             system_message = {
               "role": "system",
               "content": f"Tu es un expert en analyse sémantique et plus précisement d'avis en restauration. Tu vas aider en enrichissant un dictionnaire sémantique. Il doit être contruit avec des catégories générales et des sous-catégories. Il ne doit pas y avoir de redondance entre les sous-catégories. Dans ta réponse, tu ne rajoute aucune phrase de courstoisie, de conversation ou de Nota. Les catégories et sous-catégories doivent rester généralistes (pas de sentiments en nom de sous-catégories). Une catégorie ne peut pas avoir une seul sous-catégories. Si tu en identifie, c'est que les sous-catégories peuvent être fusionnées avec d'autres sur un thème plus large. Tu ne peux pas créer une catégorie avec un sentiment. Suis ces étapes pour construire ta réponse à l'utilisateur : 1 : comprends le dictionnaire sémantique d'origine. 2 : idéntifie les catégories et sous catégories abordées dans les nouveaux commentaires. 3 : Harmonise ces catégories et sous catégories. Tu va recevoir {nb_reviews} avis supplémentaires de mon restaurant (délimités avec des tags XML: <avis></avis>).",

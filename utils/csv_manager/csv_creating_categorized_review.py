@@ -1,7 +1,7 @@
 import csv
 
 # Étape 1: Lire le premier CSV et extraire les noms de sous-catégories
-def create_csv_categorize_review_by_categories():
+def create_csv_categorize_review_by_categories(satisfaction_data:any):
     sous_categories = []
     num_to_full = {}  # This will hold the mapping
     with open('./outputs/dico_semantique.csv', mode='r', encoding='utf-8') as csvfile:
@@ -18,20 +18,6 @@ def create_csv_categorize_review_by_categories():
         csvwriter.writeheader()
 
     # Exemple de données (à remplacer par les vraies données)
-    satisfaction_data = {
-        "1.1": {
-            "S": ["P1", "P13", "P14", "P21", "P27", "P28"],
-            "NS": ["P15", "P30"]
-        },
-        "1.2": {
-            "S": ["P13", "P14", "P27"],
-            "NS": ["P15","P1", "P23", "P24", "P30"]
-        },
-        "1.3": {
-            "S": ["P13", "P25", "P28"],
-            "NS": ["P2", "P6","P1", "P20", "P29"]
-        },
-    }
 
     # Créer un dictionnaire pour stocker les données de chaque personne
     persons_data = {}
@@ -71,5 +57,4 @@ def create_csv_categorize_review_by_categories():
         csvwriter.writeheader()
         for row in sorted_rows:
             csvwriter.writerow(row)
-
     
