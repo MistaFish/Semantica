@@ -7,7 +7,7 @@ def create_csv_enriched_data_source():
 
 	# Enrichir data_source avec les données de enriched_reviews
 	for index, row in enriched_reviews.iterrows():
-			line_number = int(row['ID_personne'][1:]) - 1  # Convertir 'P1' en 0, 'P2' en 1, etc.
+			line_number = int(row['reviewer_id'][1:]) - 1  # Convertir 'P1' en 0, 'P2' en 1, etc.
 			if line_number < len(data_source):
 					for col in enriched_reviews.columns[1:]:
 							data_source.at[line_number, col] = row[col]
