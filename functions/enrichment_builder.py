@@ -1,4 +1,3 @@
-import json
 import openai
 from utils.batch import Batch
 from utils.categorize.class_dico_manager import Dico_manager
