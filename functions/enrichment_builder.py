@@ -2,9 +2,12 @@ import openai
 from utils.batch import Batch
 from utils.categorize.class_dico_manager import Dico_manager
 from utils.constants.loading_indicator import LoadingBar
+from utils.constants.params import GET_ENRICHMENT_CONTENT
 from utils.csv_manager.csv_extractor import CSVExtractor, get_total_line_count
+from utils.constants.params import CALL_API
 
-filename = "/Users/mistafish/Desktop/FuckingDev/Présence/Semantica/datasource.csv"
+filename = "datasource.csv"
+
 
 def enrich_user_request(dico_manager: Dico_manager, batch: Batch) -> str:
   system_message = {
@@ -30,8 +33,8 @@ def enrich_user_request(dico_manager: Dico_manager, batch: Batch) -> str:
           "2 : détermine si l'avis est satisfait ou instatisfait. "
           f"Tu vas recevoir {batch.batch_size} avis de restaurants (délimités avec des tags XML: <avis></avis>). "
           "Le format de réponse attendu est un objet JSON où chaque clé est l'ID de l'avis (P1, P2, etc.), "
-          "et la valeur est un objet contenant des paires clé-valeur pour chaque ésous-catégorie identifiée, "
-          "avec 'S' si l'avis est satisfaisant ou 'NS' si l'avis est non satisfaisant pour cette catégorie/sous-catégorie. "
+          "et la valeur est un objet contenant des paires clé-valeur pour chaque sous-catégorie identifiée, "
+          "avec 'S' si l'avis est satisfaisant ou 'NS' si l'avis est non satisfaisant pour cette sous-catégorie. "
           "Exemple : { 'PX': { '1.1': 'S', '1.2': 'S', '2.1': 'NS' }, 'PY': {...}, ... }"
       ),
   }
@@ -51,20 +54,23 @@ def enrich_user_request(dico_manager: Dico_manager, batch: Batch) -> str:
           reviews_message,
       ]
 
-  # print(messages)
-  response = openai.ChatCompletion.create(
-      model="gpt-3.5-turbo",
-      max_tokens=1500,
-      messages=messages,
-  )
-  print(f"BATCH COMPLETED WITH REASON : {response['choices'][0].finish_reason}")
-  # print (response['choices'][0].message.content)
+  if GET_ENRICHMENT_CONTENT:
+    print(messages)
+    return
+  else:
+    if (CALL_API):
+      response = openai.ChatCompletion.create(
+          model="gpt-3.5-turbo",
+          max_tokens=1500,
+          messages=messages,
+      )
+      print(f"BATCH COMPLETED WITH REASON : {response['choices'][0].finish_reason}")
   return response['choices'][0].message.content
 
 
 def enrichment_builder():
   dico_manager = Dico_manager()
-  total_batches = 10
+  total_batches = 2
   loading_bar = LoadingBar(total_batches)
 
   total_line_count = get_total_line_count(filename)
@@ -72,8 +78,9 @@ def enrichment_builder():
   for i in range(total_batches):
     batch = extractor.extract_comments_in_batches()
     response: str = enrich_user_request(dico_manager, batch)
+    if (GET_ENRICHMENT_CONTENT):
+      return
     dico_manager.process_reviews(response)
+    dico_manager.write_to_enriched_reviews('outputs/enriched_reviews.csv')
     loading_bar.update()
   loading_bar.close() 
-
-  dico_manager.write_to_enriched_reviews('/Users/mistafish/Desktop/FuckingDev/Présence/Semantica/outputs/enriched_reviews.csv')

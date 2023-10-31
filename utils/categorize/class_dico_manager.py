@@ -6,7 +6,7 @@ from utils.categorize.class_reviewer import Reviewer
 from typing import Dict
 
 
-file_path = '/Users/mistafish/Desktop/FuckingDev/Présence/Semantica/outputs/dico_semantique.csv'
+file_path = 'outputs/dico_semantique.csv'
 
 class Dico_manager():
     def __init__(self):

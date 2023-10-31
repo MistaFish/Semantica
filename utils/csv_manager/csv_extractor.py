@@ -1,5 +1,6 @@
 import csv
 from tiktoken import Encoding, get_encoding
+from ..constants.params import DEBUG
 
 from ..comment import Comment
 from ..batch import Batch
@@ -47,28 +48,31 @@ class CSVExtractor:
 
 
                 if total_token_count + token_count >= max_tokens:
-#                     self.Batch.print_batch()
-#                     print(
-#                         f"Stopped at line {reader.line_num} with \
-# {total_token_count} tokens and in batch {self.Batch.batch_size} reviews."
-#                     )
                     self.last_read_position = i
+                    if (DEBUG):
+                        self.Batch.print_batch()
+                        print(
+                            f"Stopped at line {reader.line_num} with \
+{total_token_count} tokens and in batch {self.Batch.batch_size} reviews."
+                        )
                     break
                 total_token_count += token_count
                 self.total_comments += 1
                 self.Batch.add_comment(comment, token_count)
                 if reader.line_num == self.total_line_count:
-#                     self.Batch.print_batch()
-#                     print(
-#                         f"Stopped at line {reader.line_num} with \
-# {total_token_count} tokens and in batch {self.Batch.batch_size} reviews."
-#                     )
-#                     print("Reached EOF.")
                     self.eof = True
+                    if (DEBUG):
+                        self.Batch.print_batch()
+                        print(
+                            f"Stopped at line {reader.line_num} with \
+{total_token_count} tokens and in batch {self.Batch.batch_size} reviews."
+                        )
+                        print("Reached EOF.")
                     break
-
 
         self.total_batches += 1
         self.total_tokens += total_token_count
-        # print(f"Total Tokens Processed: {self.Batch.batch_token_count}")
+        if (DEBUG):
+            print(f"Total Tokens Processed: {self.Batch.batch_token_count}")
+            print(f"Total Batchs Processed: {self.total_batches}")
         return self.Batch
