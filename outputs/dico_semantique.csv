@@ -1,36 +1,19 @@
-num_categorie,nom_categorie,num_sous_categorie,nom_sous_categorie
-1.,: Propreté,1.1,: Propreté des lieux
-1.,: Propreté,1.2,: Maintenance des lieux
-1.,: Propreté,1.3,: Propreté des toilettes
-2.,: Personnel,2.1,: Amabilité du personnel
-2.,: Personnel,2.2,: Organisation du personnel
-2.,: Personnel,2.3,: Réactivité du personnel
-2.,: Personnel,2.4,: Disponibilité du personnel
-2.,: Personnel,2.5,: Professionnalisme du personnel
-2.,: Personnel,2.6,: Attention du personnel
-3.,: Expérience client,3.1,: Accueil
-3.,: Expérience client,3.2,: Fluidité du passage en caisse
-3.,: Expérience client,3.3,: Gestion de l'attente
-3.,: Expérience client,3.4,: Gestion des commandes spéciales
-4.,: Plats,4.1,: Variété des plats
-4.,: Plats,4.2,: Qualité des plats
-4.,: Plats,4.3,: Disponibilité des plats
-4.,: Plats,4.4,: Température des plats
-4.,: Plats,4.5,: Présentation des plats
-5.,: Diversité,5.1,: Gamme de desserts
-5.,: Diversité,5.2,: Gamme de légumes
-5.,: Diversité,5.3,: Gamme de boissons
-6.,: Ambiance,6.1,: Niveau de bruit
-6.,: Ambiance,6.2,: Animation musicale
-6.,: Ambiance,6.3,: Configuration des espaces
-7.,: Confort,7.1,: Confort des lieux
-7.,: Confort,7.2,: Commodité d'accès
-8.,: Prix,8.1,: Prix des menus
-9.,: Buffet,9.1,: Qualité du buffet
-9.,: Buffet,9.2,: Choix au buffet
-9.,: Buffet,9.3,: Réassort du buffet
-10.,: Menu,10.1,: Choix au menu
-10.,: Menu,10.2,: Disponibilité des options du menu 
-11.,: Installations,11.1,: État des jeux pour enfants
-11.,: Installations,11.2,: État de la fontaine à eau
-12.,: Equipement,12.1,: Disponibilité des accessoires de table
+num_category,nom_category,num_sous_category,nom_sous_category
+1.0,: Qualité de service,1.1,: Amabilité du personnel
+1.0,: Qualité de service,1.2,: Compétence du personnel
+1.0,: Qualité de service,1.3,: Disponibilité du personnel
+2.0,: Expérience au restaurant,2.1,: Temps d'attente
+2.0,: Expérience au restaurant,2.2,": Propreté (restaurant, toilettes)"
+2.0,: Expérience au restaurant,2.3,": Ambiance générale (propre, bruyante, silencieuse, familiale)"
+3.0,: Qualité de la nourriture,3.1,: Goût de la nourriture 
+3.0,: Qualité de la nourriture,3.2,: Température et cuisson de la nourriture 
+3.0,: Qualité de la nourriture,3.3,: Fraîcheur de la nourriture 
+3.0,: Qualité de la nourriture,3.4,: Diversité et choix de la nourriture 
+3.0,: Qualité de la nourriture,3.5,: Disponibilité de la nourriture 
+4.0,: Prix,4.1,: Valeur de la nourriture pour le prix
+4.0,: Prix,4.2,: Offres de réduction 
+5.0,: Installations,5.1,: Restaurant et décoration
+5.0,: Installations,5.2,: Zone des toilettes 
+5.0,: Installations,5.3,: Aire de jeux pour enfants 
+6.0,: Communications,6.1,: Communication avec le personnel
+6.0,: Communications,6.2,: Connaissance du personnel sur les produits

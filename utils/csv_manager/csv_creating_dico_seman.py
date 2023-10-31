@@ -23,7 +23,7 @@ def create_csv_dico_semantic(data:str):
         remaining = ligne[first_space+1:]
 
         if '.' in first_part and (first_part[0].isdigit() or first_part[1].isdigit()):
-            if ligne[0].isdigit() and first_part.count('.') == 1 and not ligne[first_dot+1].isdigit() :
+            if ligne[0].isdigit() and (ligne[first_dot+1] == "0" or not ligne[first_dot+1].isdigit() or first_dot == -1) :
                 # This is a main category
                 num_categorie_courante, categorie_courante = first_part, remaining
             else:
@@ -34,5 +34,5 @@ def create_csv_dico_semantic(data:str):
     # Write data to CSV
     with open('./outputs/dico_semantique.csv', mode='w', newline='', encoding='utf-8') as file:
         writer = csv.writer(file)
-        writer.writerow(['num_categorie', 'nom_categorie', 'num_sous_categorie', 'nom_sous_categorie'])
+        writer.writerow(['num_category', 'nom_category', 'num_sous_category', 'nom_sous_category'])
         writer.writerows(donnees_csv)
