@@ -11,16 +11,17 @@ def get_total_line_count(filename: str) -> int:
         return sum(1 for _ in file)
 
 class CSVExtractor:
-    def __init__(self, filename: str, total_line_count: int) -> None:
+    def __init__(self, filename: str, total_line_count: int, last_read_pos: int = 1) -> None:
         self.filename: str = filename
         self.encoder: Encoding = get_encoding("cl100k_base")
         self.Batch: Batch = Batch()
         self.total_line_count: int = total_line_count
-        self.last_read_position: int = 0
+        self.last_read_position: int = last_read_pos - 1
         self.total_comments: int = 0
         self.total_tokens: int = 0
         self.total_batches: int = 0
         self.eof: bool = False
+        
 
 
     def _count_tokens(self, text: str) -> int:

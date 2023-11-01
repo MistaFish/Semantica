@@ -1,6 +1,7 @@
 import os
 import openai
 from dotenv import load_dotenv
+from utils.constants.params import CALL_API
 
 class DicoBuilder:
     def __init__(self):
@@ -61,19 +62,24 @@ class DicoBuilder:
                  "\n{previous_dico}.\n"
               )
             }
-            
-          response_start_building_dico = openai.ChatCompletion.create(
-              model=model_gpt,
-              max_tokens=700,
-              messages=[
-                  system_message,
-                  user_message,
-                  reviews_message,
-              ],
-          )
 
-          print(f"BATCH COMPLETED WITH REASON : {response_start_building_dico['choices'][0].finish_reason}")
-          print(f"\nOPENAI RESPONSE : {response_start_building_dico}")
+          if(CALL_API):
+            response_start_building_dico = openai.ChatCompletion.create(
+                model=model_gpt,
+                max_tokens=700,
+                messages=[
+                    system_message,
+                    user_message,
+                    reviews_message,
+                ],
+            )
+
+          if response_start_building_dico['choices'][0].finish_reason == "stop":
+            print(" => BATCH PROCESSED")
+          else : 
+            print(f"BATCH COMPLETED WITH REASON : {response_start_building_dico['choices'][0].finish_reason}")
+            
+          # print(f"\nOPENAI RESPONSE : {response_start_building_dico}")
           dico_seman = response_start_building_dico['choices'][0].message.content
           return dico_seman
       
@@ -95,14 +101,15 @@ class DicoBuilder:
           "content":dico_seman
 				}
         
-        response_enrich_dico = openai.ChatCompletion.create(
-            model="gpt-4",
-            messages=[
-                system_message,
-                user_message,
-                dico_seman_message,
-            ]
-        )
+        if(CALL_API):
+          response_enrich_dico = openai.ChatCompletion.create(
+              model="gpt-4",
+              messages=[
+                  system_message,
+                  user_message,
+                  dico_seman_message,
+              ]
+          )
         print(f"BATCH COMPLETED WITH REASON : {response_enrich_dico['choices'][0].finish_reason}")
         dico_seman_harmonized = response_enrich_dico['choices'][0].message.content
         return dico_seman_harmonized

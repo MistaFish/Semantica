@@ -35,16 +35,35 @@ class Dico_manager():
             csvreader = csv.reader(csvfile)
             next(csvreader, None)
             for row in csvreader:
-                num_category, name_category, num_sub_category, name_sub_category = row
-                if num_category not in self.categories:
-                    self.categories[num_category] = Category(num_category , name_category)
+                num_categorie, nom_categorie, num_sous_categorie, nom_sous_categorie = row
+                if num_categorie not in self.categories:
+                    self.categories[num_categorie] = Category(num_categorie , nom_categorie)
                 # Create Sub_category object
-                sub_category = Sub_category(num_sub_category, name_sub_category)
+                sub_category = Sub_category(num_sous_categorie, nom_sous_categorie)
                 # Add Sub_category object to the appropriate Category object
-                self.categories[num_category].add_sub_category(num_sub_category, sub_category)
+                self.categories[num_categorie].add_sub_category(num_sous_categorie, sub_category)
 
     def process_reviews(self, reviews_string: str):
+
+        reviews_string = reviews_string.replace("'",'"')
+        reviews_string = reviews_string.replace(' S', ' "S"')
+        reviews_string = reviews_string.replace(' NS', ' "NS"')
         reviews = json.loads(reviews_string)
+
+        # CHECK EN AMOUNT SI IL Y PRESENCE D'UNE SOUS CATEGORIE NON EXISTANTE => RETURN TRUE OR FALSE
+        for review_id, categories in reviews.items():
+            for num_sub_category, satisfaction in categories.items():
+                # if the num_sub_category doesn't respect the format "X.Y"
+                if len(num_sub_category.split('.')) != 2:
+                    print(f"\033[91m ERROR===> num_sub_category : {num_sub_category} doesn't respect the format 'X.Y'\033[0m")
+                    return True
+                #  check if the num_sub_category is in the dico
+                num_category = num_sub_category.split('.')[0] + '.'
+                if (num_sub_category not in self.categories[num_category].sub_categories.keys()):
+                    print(self.categories[num_category].sub_categories.keys())
+                    print(f"\033[91m ERROR===> num_sub_category : {num_sub_category} not in the dico\033[0m")
+                    return True
+
 
         for review_id, categories in reviews.items():
             if review_id not in self.reviewers:
@@ -56,6 +75,7 @@ class Dico_manager():
                 self.categories[num_category].sub_categories[num_sub_category].add_review(review_id, satisfaction)
                 # Update the Reviewer object with this sub-category's satisfaction level
                 self.reviewers[review_id].add_satisfaction(num_sub_category, satisfaction)
+        return False
 
 
     def write_to_enriched_reviews(self, file_path: str):

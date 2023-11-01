@@ -22,7 +22,7 @@ dico_enriched = None
 if DICO_SEMANTIC:
   print("\033[195m********************************************************************\033[0m")
   print("\033[92m___________________CONSTRUCTION DICTIONNAIRE________________________\033[0m")
-  total_batches = 11
+  total_batches = 5
   loading_bar = LoadingBar(total_batches)
   if (BATCH):
     total_reviews = 0
@@ -50,13 +50,18 @@ if DICO_SEMANTIC:
             dico_enriched
         )
         i = i + 1
-  create_csv_dico_semantic(dico_enriched)
+  
+  print(dico_enriched)
+    
   if HARMONIZE_SEMANTIC:
     print("\033[92m ====> HARMONISATION DU DICTIONNAIRE\033[0m")
     dico_done = dico_builder.harmonize_semantic_dico(dico_enriched)
+    if (DEBUG):
+      print(dico_done)
+
   loading_bar.close()
-  if (DEBUG):
-    print(dico_enriched)
+
+  create_csv_dico_semantic(dico_enriched)
 
   print("\033[91m_________________FIN CONSTRUCTION DICTIONNAIRE______________________\033[0m")
   print("\n\033[95m********************************************************************\033[0m")

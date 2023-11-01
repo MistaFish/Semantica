@@ -1,0 +1,53 @@
+num_categorie,nom_categorie,num_sous_categorie,nom_sous_categorie
+1.,Nourriture,1.1,Repas
+1.,Nourriture,1.2,Plats chauds
+1.,Nourriture,1.3,Plats d'accompagnement
+1.,Nourriture,1.4,Buffet
+1.,Nourriture,1.5,Garniture
+1.,Nourriture,1.6,Desserts
+1.,Nourriture,1.7,Légumes
+1.,Nourriture,1.8,Température de la nourriture
+1.,Nourriture,1.9,Choix et variété de plats
+1.,Nourriture,1.10,Portion
+1.,Nourriture,1.11,Conformité
+2.,Atmosphère,2.1,Environnement
+2.,Atmosphère,2.2,Ambiance
+2.,Atmosphère,2.3,Bruit
+2.,Atmosphère,2.4,Affluence des clients
+3.,Service,3.1,Rapidité du service
+3.,Service,3.2,Accueil
+3.,Service,3.3,Gestion de l'affluence
+3.,Service,3.4,Patience et courtoisie
+3.,Service,3.5,Professionnalisme
+3.,Service,3.6,Efficacité du service
+4.,Propreté,4.1,Propreté générale
+4.,Propreté,4.2, Propreté des toilettes
+4.,Propreté,4.3, Propreté de la vaisselle
+4.,Propreté,4.4, Propreté de la salle
+5.,Equipements,5.1,Mobilier
+5.,Equipements,5.2,Vitrines et plateaux
+5.,Equipements,5.3,Zone de jeux
+5.,Equipements,5.4,Accessibilité PMR
+6.,Expérience client,6.1,Satisfaction générale
+6.,Expérience client,6.2,Attentes
+6.,Expérience client,6.3,Rapport qualité-prix
+6.,Expérience client,6.4,Interaction avec le personnel
+6.,Expérience client,6.5,Commodité et praticité
+7.,Personnel,7.1,Professionnel en cuisine
+7.,Personnel,7.2,Caissier
+7.,Personnel,7.3,Employé au buffet
+8.,Décoration,8.1,Esthétique générale
+8.,Décoration,8.2,Agencement
+9.,Disturbance,9.1,Attente en caisse
+9.,Disturbance,9.2,Bruit émanent des équipements
+10.,Pratiques commerciales,10.1,Remise de ticket de caisse
+10.,Pratiques commerciales,10.2,Politique d'étiquetage des aliments
+10.,Pratiques commerciales,10.3,Présentation des produits
+11.,Recommendation,11.1,Critiques positives
+11.,Recommendation,11.2,Critiques négatives
+12.,Localisation,12.1,Restaurant
+12.,Localisation,12.2,Zone légumes
+12.,Localisation,12.3,Zone plats chauds
+12.,Localisation,12.4,Zone desserts.
+13.,Hygiène,13.1,Hygiène du personnel
+13.,Hygiène,13.2,Hygiène en cuisine

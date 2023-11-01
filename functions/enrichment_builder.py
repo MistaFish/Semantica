@@ -14,10 +14,19 @@ def enrich_user_request(dico_manager: Dico_manager, batch: Batch) -> str:
       "role": "system",
         "content": (
           "Tu es un expert en analyse sémantique et plus précisement d'avis en restauration. "
-          "Tu vas aider en identifiant des avis basé sur un dictionnaire sémantique. "
+          "Tu vas aider en identifiant des avis basé sur un dictionnaire sémantique qui t'ai envoyé. "
           "Pour chaque avis : "
-          "Tu dois identifier les catégories et sous catégories abordées dans l'avis. "
-          "Je veux un json comme format de réponse."
+          "Tu dois identifier les sous-catégories abordées dans l'avis. "
+          "Le format de réponse attendu est un objet JSON où chaque clé est l'ID de l'avis (P1, P2, etc.), "
+          "et la valeur est un objet contenant des paires clé-valeur pour chaque sous-catégorie identifiée, "
+          "avec 'S' si l'avis est satisfaisant ou 'NS' si l'avis est non satisfaisant pour cette sous-catégorie. "
+          "Exemple : { ""PX"": { ""1.1"": ""S"", ""1.2"": ""S"", ""2.1"": ""NS"" }, ""PY"": {...}, ... }"
+          "Ta réponse contiendra uniquement l'objet."
+          "Tu ne dois pas inventer de nouvelles sous-catégories. Utilise seulement celles du dictionnaire initial."
+          "Suis ces étapes pour construire ta réponse à l'utilisateur : "
+          "1 : comprends le dictionnaire sémantique en intégrant les catégories et sous-catégories."
+          "2 : Pour chaque avis, identifie les sous-catégories abordées dans l'avis. "
+          "3 : détermine si l'avis est satisfait ou instatisfait. "
       ),
   }
   user_message = {
@@ -25,17 +34,9 @@ def enrich_user_request(dico_manager: Dico_manager, batch: Batch) -> str:
       "content": (
           "Tu as a disposition un dictionnaire sémantique. "
           "Tu as également des avis de clients. "
-          "Dans ta réponse, tu ne rajoutes aucune phrase de courstoisie, de conversation ou de Nota. "
-          "Suis ces étapes pour construire ta réponse à l'utilisateur : "
-          "Avant tout : comprends le dictionnaire sémantique "
-          "Pour chaque avis : "
-          "1 : Identifie les catégories et sous catégories abordées dans l'avis. "
-          "2 : détermine si l'avis est satisfait ou instatisfait. "
           f"Tu vas recevoir {batch.batch_size} avis de restaurants (délimités avec des tags XML: <avis></avis>). "
-          "Le format de réponse attendu est un objet JSON où chaque clé est l'ID de l'avis (P1, P2, etc.), "
-          "et la valeur est un objet contenant des paires clé-valeur pour chaque sous-catégorie identifiée, "
-          "avec 'S' si l'avis est satisfaisant ou 'NS' si l'avis est non satisfaisant pour cette sous-catégorie. "
-          "Exemple : { 'PX': { '1.1': 'S', '1.2': 'S', '2.1': 'NS' }, 'PY': {...}, ... }"
+          "Analyse les avis et répond moi avec l'objet JSON demandé."
+
       ),
   }
   dico_seman_message={
@@ -60,27 +61,36 @@ def enrich_user_request(dico_manager: Dico_manager, batch: Batch) -> str:
   else:
     if (CALL_API):
       response = openai.ChatCompletion.create(
-          model="gpt-3.5-turbo",
+          model="gpt-4",
           max_tokens=1500,
           messages=messages,
       )
       print(f"BATCH COMPLETED WITH REASON : {response['choices'][0].finish_reason}")
+  print(f'RESPONSE OPEN AI : {response}')
   return response['choices'][0].message.content
 
 
 def enrichment_builder():
   dico_manager = Dico_manager()
-  total_batches = 2
-  loading_bar = LoadingBar(total_batches)
-
+  total_batches = 47
   total_line_count = get_total_line_count(filename)
-  extractor = CSVExtractor(filename, total_line_count)
-  for i in range(total_batches):
-    batch = extractor.extract_comments_in_batches()
+  extractor = CSVExtractor(filename, total_line_count, 1040)
+  loading_bar = LoadingBar(total_batches)
+  
+  retry : bool = False
+  while True:
+    if retry is False :
+      batch = extractor.extract_comments_in_batches()
+    if extractor.eof is True:
+      break
+    retry = False
     response: str = enrich_user_request(dico_manager, batch)
     if (GET_ENRICHMENT_CONTENT):
       return
-    dico_manager.process_reviews(response)
+    retry = dico_manager.process_reviews(response)
+    if retry is True :
+      continue
+
     dico_manager.write_to_enriched_reviews('outputs/enriched_reviews.csv')
     loading_bar.update()
   loading_bar.close() 
